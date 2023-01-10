@@ -10,8 +10,8 @@ export default function Table({ summ, creditSumm, creditTime, foiz, asosiy, over
         date.getFullYear()
     ]
     const months = ["Yanvar", "fevral", 'mart', 'aprel', 'may', 'iyun', 'iyul', 'avgust', 'sentyabr', 'oktyabr', 'noyabr', 'dekabr']
-    const paymentMonths = []
-    const [years, setYears] = React.useState([])
+    let paymentMonths = []
+    let years = []
     let fisrtPayment = month
     let paymentYear = year
     for (let i = 0; i < creditTime * 12; i++) {
@@ -48,6 +48,7 @@ export default function Table({ summ, creditSumm, creditTime, foiz, asosiy, over
                                 month={paymentMonths[index]}
                                 day={day}
                                 year={years[index]}
+                                // year={year}
                                 foiz={foiz[index]}
                                 asosiy={asosiy[index]}
                                 summ={summ[index]}
