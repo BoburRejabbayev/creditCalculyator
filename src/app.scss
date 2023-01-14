@@ -103,3 +103,17 @@ body {
         }
     }
 }
+
+.form-control{
+    position: relative;
+    width: 300px;
+    z-index: 0;
+}
+
+.slider-summ{
+    position: absolute;
+    z-index: 1;
+    // bottom: -100px;
+    bottom: -50%;
+    left: 0;
+}

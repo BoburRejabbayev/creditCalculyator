@@ -1,3 +1,4 @@
+import { Alert } from '@mui/material';
 import React from 'react';
 // import './app.css'
 import './app.scss'
@@ -18,7 +19,7 @@ function App() {
   // const [calculating, setCalculating] = React.useState(['Hisoblash', 'clear'])
   const [activeCalculate, setActiveCalculate] = React.useState('Hisoblash')
 
-  // const inputRef = React.useRef()
+  const inputRef = React.useRef()
 
   const [summValue, setSummValue] = React.useState()
   const [timeValue, setTimeValue] = React.useState()
@@ -26,11 +27,12 @@ function App() {
 
 
   const onClicked = () => {
-    if (summValue > 1000000000 || timeValue > 10 || percentValue > 40) {
+    if (summValue > 1000000000 || timeValue > 20 || percentValue > 40) {
       alert('Notogri Malumot Kiritildi')
     }
     else {
       if (activeCalculate === 'Hisoblash') {
+
         credit = { summ: summValue, time: timeValue, percent: percentValue }
         setTable(true)
         console.log(credit.time);
@@ -60,6 +62,13 @@ function App() {
           }
         }
         setActiveCalculate('clear')
+        let input1 = document.querySelector('.input1')
+        let input2 = document.querySelector('.input2')
+        let input3 = document.querySelector('.input3')
+        input1.disabled = true
+        input2.disabled = true
+        input3.disabled = true
+        // console.log(input1);
       }
       else if (activeCalculate === 'clear') {
         setTable(false)
@@ -71,6 +80,13 @@ function App() {
         setTimeValue('')
         setPercentValue('')
         setActiveCalculate('Hisoblash')
+        let input1 = document.querySelector('.input1')
+        let input2 = document.querySelector('.input2')
+        let input3 = document.querySelector('.input3')
+        input1.disabled = false
+        input2.disabled = false
+        input3.disabled = false
+        alert('Successful')
       }
     }
   }
@@ -93,7 +109,6 @@ function App() {
   return (
     <div className='app'>
       <div className='app__info'>
-        {/* <input onChange={(el) => setCredit({ summ: el.target.value })} placeholder='Summani kefiriting' /> */}
         <div className="input-group">
           <input
             // ref={inputRef}
@@ -101,14 +116,17 @@ function App() {
             onChange={(el) => setSummValue(el.target.value)}
             placeholder='Summani kefiriting'
             type="number"
-            className="form-control"
+            className="form-control input1"
             aria-label="Dollar amount (with dot and two decimal places)"
           />
           <span className="input-group-text">so'm</span>
         </div>
-        <input
-          // ref={inputRef}
-          value={percentValue} type='number' onChange={(el) => setPercentValue(el.target.value)} placeholder='Credit Foizi 24%' className='input-color form-control' />
+        <div className='input-group'>
+          <input
+            // ref={inputRef}
+            value={percentValue} type='number' onChange={(el) => setPercentValue(el.target.value)} placeholder='Credit Foizi 24%' className='input2 form-control' />
+          <span className="input-group-text">%</span>
+        </div>
         <div className="sort">
           {openType &&
             <div className="sort__popup">
@@ -141,9 +159,10 @@ function App() {
         <div className="input-group">
           <input
             //  ref={inputRef}
-            value={timeValue} type="text" className="form-control" onChange={(el) => setTimeValue(el.target.value)} placeholder='Muddatni kefiriting (yilda)' aria-label="Recipient's username" aria-describedby="button-addon2" />
-          <button onClick={() => onClicked()} className="btn btn-outline-success" type="button" id="button-addon2">{activeCalculate}</button>
+            value={timeValue} type="number" className="input3 form-control" onChange={(el) => setTimeValue(el.target.value)} placeholder='Muddatni kefiriting (yilda)' aria-label="Recipient's username" aria-describedby="button-addon2" />
+          <span className="input-group-text">years</span>
         </div>
+        <button onClick={() => onClicked()} className="btn btn-outline-success" type="button" id="button-addon2">{activeCalculate}</button>
 
       </div>
       {table ?
